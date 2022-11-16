@@ -51,3 +51,5 @@ if (response.IsSuccessStatusCode)
 {
     Console.WriteLine("Email has been sent successfully");
 }
+
+//https://www.twilio.com/blog/send-emails-with-csharp-handlebars-templating-and-dynamic-email-templates
