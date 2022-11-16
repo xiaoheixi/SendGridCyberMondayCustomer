@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using System.Collections;
+using Microsoft.Data.SqlClient;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 Console.WriteLine("Getting Connection ...");
@@ -7,11 +8,26 @@ var database = "CafeOrder"; //Database Name
 var username = "wikiUser@yqme-prod-syd"; //Username
 var password = "atJnLwcM8o7dDAU6N60N9jcUaIkhOQ2F4Nq92bGoGo2KSWNPpY"; //Password
 string connString = @"Data Source=" + datasource + ";Initial Catalog=" + database + ";Persist Security Info=True;User ID=" + username + ";Password=" + password;
+var Command = @"SELECT TOP (1000) [MerchantId]
+      ,[WebsiteName],fullName,EmailAddress,UserLogin.mobile
+  FROM [dbo].[vCyberMondayMerchants] as m
+  LEFT JOIN userLogin ON userLogin.userLoginId = m.primaryUserId
+  ORDER BY MerchantId";
 SqlConnection conn = new SqlConnection(connString);
+SqlCommand Comm1 = new SqlCommand(Command, conn);
+var arlist = new ArrayList();
 try {
     Console.WriteLine("Openning Connection ...");
     conn.Open();
     Console.WriteLine("Connection successful!");
+    SqlDataReader DR1 = Comm1.ExecuteReader();
+    while (DR1.Read()) {
+        arlist.Add(DR1.GetValue(0).ToString() + ", " + DR1.GetValue(1).ToString() + ", " + DR1.GetValue(2).ToString() + ", " + DR1.GetValue(3).ToString() + ", " + DR1.GetValue(4).ToString());
+    }
+    conn.Close();
+    foreach (string x in arlist) {
+        Console.WriteLine(x);
+    }
 }
 catch (Exception e) {
     Console.WriteLine("Error: " + e.Message);
@@ -41,4 +57,6 @@ if (response.IsSuccessStatusCode)
 /*
     References
     https://www.twilio.com/blog/send-emails-with-csharp-handlebars-templating-and-dynamic-email-templates
+    https://www.codeproject.com/Questions/155444/how-to-display-data-from-sql-database-to-textbox-u
+    https://www.w3schools.com/cs/cs_foreach_loop.php
 */
