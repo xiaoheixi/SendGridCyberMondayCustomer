@@ -1,5 +1,21 @@
-﻿using SendGrid;
+﻿using Microsoft.Data.SqlClient;
+using SendGrid;
 using SendGrid.Helpers.Mail;
+Console.WriteLine("Getting Connection ...");
+var datasource = @"yqme-prod-syd.database.windows.net"; //Server
+var database = "CafeOrder"; //Database Name
+var username = "wikiUser@yqme-prod-syd"; //Username
+var password = "atJnLwcM8o7dDAU6N60N9jcUaIkhOQ2F4Nq92bGoGo2KSWNPpY"; //Password
+string connString = @"Data Source=" + datasource + ";Initial Catalog=" + database + ";Persist Security Info=True;User ID=" + username + ";Password=" + password;
+SqlConnection conn = new SqlConnection(connString);
+try {
+    Console.WriteLine("Openning Connection ...");
+    conn.Open();
+    Console.WriteLine("Connection successful!");
+}
+catch (Exception e) {
+    Console.WriteLine("Error: " + e.Message);
+}
 var apiKey = Environment.GetEnvironmentVariable("CyberMondayCustomerTest");
 var client = new SendGridClient(apiKey);
 var from = new EmailAddress("confirmation@yqme.com.au", "YQme");
