@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Justin Zhao\\MyApp\\MyApp.csproj": {}
+    "C:\\Users\\Justin Zhao\\SendGridCyberMondayCustomer\\MyApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Justin Zhao\\MyApp\\MyApp.csproj": {
+    "C:\\Users\\Justin Zhao\\SendGridCyberMondayCustomer\\MyApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Justin Zhao\\MyApp\\MyApp.csproj",
+        "projectUniqueName": "C:\\Users\\Justin Zhao\\SendGridCyberMondayCustomer\\MyApp.csproj",
         "projectName": "MyApp",
-        "projectPath": "C:\\Users\\Justin Zhao\\MyApp\\MyApp.csproj",
+        "projectPath": "C:\\Users\\Justin Zhao\\SendGridCyberMondayCustomer\\MyApp.csproj",
         "packagesPath": "C:\\Users\\Justin Zhao\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Justin Zhao\\MyApp\\obj\\",
+        "outputPath": "C:\\Users\\Justin Zhao\\SendGridCyberMondayCustomer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Justin Zhao\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tkSQ8Yfq7NKA8gDziPXeLz1B3XYChQtnYBVf66ZSVHWZexIkB+9DcsKSR/yQyRTbcZGulqxQ82v/WH7X4hQo8g==",
+  "dgSpecHash": "Kop4ygxW7cFLnXQeLytc1qq+Az3ThtRm8C59a7TTL1kID12VBNz5pgXW70PP9H0eG9WiOLEMpSdfSCf6hRHTvw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Justin Zhao\\MyApp\\MyApp.csproj",
+  "projectFilePath": "C:\\Users\\Justin Zhao\\SendGridCyberMondayCustomer\\MyApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Justin Zhao\\.nuget\\packages\\microsoft.extensions.configuration\\2.1.0\\microsoft.extensions.configuration.2.1.0.nupkg.sha512",
     "C:\\Users\\Justin Zhao\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\2.1.0\\microsoft.extensions.configuration.abstractions.2.1.0.nupkg.sha512",
