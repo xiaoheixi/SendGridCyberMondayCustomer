@@ -7,8 +7,8 @@ var to = new EmailAddress("justin.zhao@techsol.net.au", "Justin");
 var templateId = "d-bed201f8dccf4f4ca2bcd20bbc2a9215";
 var dynamicTemplateData = new
 {
-    subject = $"To-Do List for {DateTime.UtcNow:MMMM}",
-    recipientName = "Valued Customer", 
+    subject = "Cyber Monday Specials!",
+    recipientName = "Insert PatronName", 
     todoItemList = new[]
     {
         new { title = "Organize invoices", dueDate = "11 June 2022", status = "Completed" },
