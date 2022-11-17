@@ -31,14 +31,12 @@ try {
     }
     conn.Close();
     foreach (string x in arlist) {
-        Console.WriteLine(x);
-        Console.WriteLine(x.Split(',')[2].TrimStart());
         var dynamicTemplateData = new
         {
             subject = "Cyber Monday Specials!",
-            recipientName = x.Split(',')[2].TrimStart(), 
-            WebsiteNumber = x.Split(',')[1].TrimStart(),
-            PhoneNumber = x.Split(',')[4].TrimStart()
+            recipientName = x.Split(',')[2].TrimStart().Replace("'", ""), 
+            WebsiteNumber = x.Split(',')[1].TrimStart().Replace("'", ""),
+            PhoneNumber = x.Split(',')[4].TrimStart().Replace("'", "")
         };
         var msg = MailHelper.CreateSingleTemplateEmail(from, to, templateId, dynamicTemplateData);
         var response = await client.SendEmailAsync(msg);
