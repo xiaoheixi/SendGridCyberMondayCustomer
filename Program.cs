@@ -13,37 +13,39 @@ var database = "CafeOrder"; //Database Name
 var username = "wikiUser@yqme-prod-syd"; //Username
 var password = "atJnLwcM8o7dDAU6N60N9jcUaIkhOQ2F4Nq92bGoGo2KSWNPpY"; //Password
 string connString = @"Data Source=" + datasource + ";Initial Catalog=" + database + ";Persist Security Info=True;User ID=" + username + ";Password=" + password;
-var Command = @"SELECT TOP (1000) [MerchantId]
-      ,[WebsiteName],fullName,EmailAddress,UserLogin.mobile
-  FROM [dbo].[vCyberMondayMerchants] as m
-  LEFT JOIN userLogin ON userLogin.userLoginId = m.primaryUserId
-  ORDER BY MerchantId";
+var Command = @"SELECT TOP (36000) * FROM vCyberMondayCustomerList";
 SqlConnection conn = new SqlConnection(connString);
 SqlCommand Comm1 = new SqlCommand(Command, conn);
 var arlist = new ArrayList();
+var count = 1;
 try {
     Console.WriteLine("Openning Connection ...");
     conn.Open();
     Console.WriteLine("Connection successful!");
     SqlDataReader DR1 = Comm1.ExecuteReader();
     while (DR1.Read()) {
-        arlist.Add(DR1.GetValue(0).ToString() + ", " + DR1.GetValue(1).ToString() + ", " + DR1.GetValue(2).ToString() + ", " + DR1.GetValue(3).ToString() + ", " + DR1.GetValue(4).ToString());
+        arlist.Add(DR1.GetValue(0).ToString() + ", " + DR1.GetValue(1).ToString() + ", " + DR1.GetValue(2).ToString() + ", " + DR1.GetValue(3).ToString() + ", " + DR1.GetValue(4).ToString() + ", " + DR1.GetValue(5).ToString() + ", " + DR1.GetValue(6).ToString());
     }
     conn.Close();
     foreach (string x in arlist) {
         var dynamicTemplateData = new
         {
             subject = "Cyber Monday Specials!",
-            recipientName = x.Split(',')[2].TrimStart().Replace("'", ""), 
-            WebsiteNumber = x.Split(',')[1].TrimStart().Replace("'", ""),
-            PhoneNumber = x.Split(',')[4].TrimStart().Replace("'", "")
+            UserLoginId = x.Split(',')[0].TrimStart().Replace("'", ""), 
+            FullName = x.Split(',')[1].TrimStart().Replace("'", ""),
+            EmailAddress = x.Split(',')[2].TrimStart().Replace("'", ""),
+            Mobile = x.Split(',')[3].TrimStart().Replace("'", ""),
+            Merchant = x.Split(',')[4].TrimStart().Replace("'", ""),
+            DefaultHostname = x.Split(',')[5].TrimStart().Replace("'", ""),
+            ThumbnailImage = x.Split(',')[6].TrimStart().Replace("'", "")
         };
         var msg = MailHelper.CreateSingleTemplateEmail(from, to, templateId, dynamicTemplateData);
         var response = await client.SendEmailAsync(msg);
         if (response.IsSuccessStatusCode)
         {
-            Console.WriteLine("Email has been sent successfully");
+            Console.WriteLine("Email " + count + " has been sent successfully");
         }
+        count++;
     }
 }
 catch (Exception e) {
