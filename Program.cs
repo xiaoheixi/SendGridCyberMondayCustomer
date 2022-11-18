@@ -14,7 +14,7 @@ var count = 1;
             Console.WriteLine(x); 
             var dynamicTemplateData = new
             {
-                subject = "Cyber Monday Specials!",
+                subject = x.Split(',')[4].TrimStart().Replace("'", "") + " - 5% off Cyber Monday PROMOTION!",
                 UserLoginId = x.Split(',')[0].TrimStart().Replace("'", ""), 
                 FullName = x.Split(',')[1].TrimStart().Replace("'", ""),
                 EmailAddress = x.Split(',')[2].TrimStart().Replace("'", ""),
