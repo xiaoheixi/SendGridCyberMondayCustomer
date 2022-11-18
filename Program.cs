@@ -14,7 +14,7 @@ var count = 1;
             Console.WriteLine(x); 
             var dynamicTemplateData = new
             {
-                subject = "Cyber Monday Specials!",
+                subject = x.Split(',')[1].TrimStart().Replace("'", "") + " - 5% off Cyber Monday PROMOTION!",
                 UserLoginId = x.Split(',')[0].TrimStart().Replace("'", ""), 
                 FullName = x.Split(',')[1].TrimStart().Replace("'", ""),
                 EmailAddress = x.Split(',')[2].TrimStart().Replace("'", ""),
@@ -23,7 +23,7 @@ var count = 1;
                 DefaultHostname = x.Split(',')[5].TrimStart().Replace("'", ""),
                 ThumbnailImage = x.Split(',')[6].TrimStart().Replace("'", "")
             };
-            to = new EmailAddress(x.Split(',')[2].TrimStart().Replace("'", ""), x.Split(',')[1].TrimStart().Replace("'", ""));
+            // to = new EmailAddress(x.Split(',')[2].TrimStart().Replace("'", ""), x.Split(',')[1].TrimStart().Replace("'", ""));
             var msg = MailHelper.CreateSingleTemplateEmail(from, to, templateId, dynamicTemplateData);
             var response = await client.SendEmailAsync(msg);
             if (response.IsSuccessStatusCode)
