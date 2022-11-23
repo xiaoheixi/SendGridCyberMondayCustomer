@@ -23,12 +23,21 @@ var count = 1;
                 DefaultHostname = x.Split(',')[5].TrimStart().Replace("'", ""),
                 ThumbnailImage = x.Split(',')[6].TrimStart().Replace("'", "")
             };
-            to = new EmailAddress(x.Split(',')[2].TrimStart().Replace("'", ""), x.Split(',')[1].TrimStart().Replace("'", ""));
+            //to = new EmailAddress(x.Split(',')[2].TrimStart().Replace("'", ""), x.Split(',')[1].TrimStart().Replace("'", ""));
             var msg = MailHelper.CreateSingleTemplateEmail(from, to, templateId, dynamicTemplateData);
             var response = await client.SendEmailAsync(msg);
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine("Email " + count + " has been sent successfully");
+            var tempFile = Path.GetTempFileName();
+            var linesToKeep = File.ReadLines(textFile).Where(l => l != x);
+            File.WriteAllLines(tempFile, linesToKeep);
+            File.Delete(textFile);
+            File.Move(tempFile, textFile);
+            Console.WriteLine("Email " + count + " has been sent successfully.");
+            }
+            else
+            {
+                Console.WriteLine("Email " + count + " has failed to send.");
             }
             count++; 
         } 
@@ -39,4 +48,5 @@ var count = 1;
     https://www.codeproject.com/Questions/155444/how-to-display-data-from-sql-database-to-textbox-u
     https://www.w3schools.com/cs/cs_foreach_loop.php
     https://www.c-sharpcorner.com/UploadFile/mahesh/how-to-read-a-text-file-in-C-Sharp/
+    https://stackoverflow.com/questions/668907/how-to-delete-a-line-from-a-text-file-in-c
 */
